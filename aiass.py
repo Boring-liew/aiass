@@ -178,7 +178,7 @@ if st.button("Predict Comment Type"):
             prediction = "Negative"
             confidence = 0.9
 
-        elif len(user_input.split()) <= 2:
+        elif len(user_input.split()) <= 1:
 
             prediction = "Neutral"
             confidence = 0.5
