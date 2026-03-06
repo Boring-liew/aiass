@@ -168,7 +168,20 @@ if st.button("Predict Comment Type"):
         # Prediction Logic
         # ---------------------------
 
-      
+        if any(word in text_lower for word in toxic_words):
+
+            prediction = "Toxic"
+            confidence = 1.0
+
+        elif any(word in text_lower for word in negative_keywords):
+
+            prediction = "Negative"
+            confidence = 0.9
+
+
+
+        else:
+
             input_vector = vectorizer.transform([cleaned])
 
             st.write("TF-IDF Vector Shape:")
