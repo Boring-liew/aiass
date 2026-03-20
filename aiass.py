@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 from nltk.corpus import stopwords
 from sklearn.metrics import confusion_matrix
-
+import seaborn as sns
 
 # ---------------------------
 # Load Model
@@ -270,7 +270,7 @@ if len(st.session_state.history) > 5:
 
     fig,ax = plt.subplots()
 
-   
+    sns.heatmap(cm,annot=True,fmt="d",cmap="Blues",ax=ax)
 
     ax.set_xlabel("Predicted")
     ax.set_ylabel("Actual")
