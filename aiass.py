@@ -4,10 +4,10 @@ import re
 import nltk
 import numpy as np
 import matplotlib.pyplot as plt
-
+import pandas as pd
 from nltk.corpus import stopwords
 from sklearn.metrics import confusion_matrix
-
+import seaborn as sns
 
 # ---------------------------
 # Load Model
@@ -95,9 +95,36 @@ st.subheader("Model Information")
 
 vocab_size = len(vectorizer.get_feature_names_out())
 
-st.write("Model Type:", "LinearSVC")
-st.write("Vocabulary Size:", vocab_size)
 st.write("Feature Type:", "TF-IDF (Unigram + Bigram)")
+st.write("Vocabulary Size:", vocab_size)
+
+st.markdown("### Model Comparison")
+model_df = pd.DataFrame({
+    "Model": ["Naive Bayes", "Logistic Regression", "SVM"],
+    "Accuracy": [0.70, 0.89, 0.91]
+})
+
+st.table(model_df)
+st.markdown("### Model Performance Details")
+
+st.markdown("""
+**Naive Bayes**
+- Precision: 0.75
+- Recall: 0.70
+- F1-score: 0.69
+
+**Logistic Regression**
+- Precision: 0.89
+- Recall: 0.89
+- F1-score: 0.89
+
+**SVM**
+- Precision: 0.91
+- Recall: 0.91
+- F1-score: 0.91
+""")
+
+
 
 # ---------------------------
 # Example Buttons
@@ -270,7 +297,7 @@ if len(st.session_state.history) > 5:
 
     fig,ax = plt.subplots()
 
-    
+    sns.heatmap(cm,annot=True,fmt="d",cmap="Blues",ax=ax)
 
     ax.set_xlabel("Predicted")
     ax.set_ylabel("Actual")
